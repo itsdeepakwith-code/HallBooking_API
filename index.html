@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Data</title>
+</head>
+<body>
+    <h1>Welcome to the Hall Booking API</h1>
+    <p>Please use Postman to test the API endpoints.</p>
+    <h2>API Endpoints:</h2>
+    <ul>
+        <li><strong>Create a Room:</strong> POST /rooms</li>
+        <li><strong>Get All Rooms:</strong> GET /rooms</li>
+        <li><strong>Book a Room:</strong> POST /bookings</li>
+        <li><strong>Get All Bookings:</strong> GET /bookings</li>
+        <li><strong>Get All Customers:</strong> GET /customers</li>
+        <li><strong>Get Customer Bookings:</strong> GET /customers/:customerName</li>
+    </ul>
+
+    <script>
+        fetch('http://localhost:3000/rooms') // Fetch room data from your Express server
+            .then(response => response.json())
+            .then(rooms => {
+                const roomList = document.getElementById('roomList');
+                rooms.forEach(room => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Room Name: ${room.name}, Seats: ${room.seats}, Amenities: ${room.amenities.join(', ')}, Price: $${room.price}/hour`;
+                    roomList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching room data:', error));
+    </script>
+</body>
+</html>
